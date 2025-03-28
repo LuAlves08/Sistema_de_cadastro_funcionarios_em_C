@@ -39,3 +39,28 @@ void cadastrarFuncionario() {
 
     printf("Funcionário cadastrado com sucesso!\n");
 }
+void listarFuncionarios() {
+    FILE *arquivo = fopen("funcionarios.txt", "r");
+    if (arquivo == NULL) {
+        printf("\nNenhum funcionário cadastrado ainda.\n");
+        return;
+    }
+
+    Funcionario temp;
+    int contador = 0;
+
+    printf("\n===== Lista de Funcionários =====\n");
+    while (fscanf(arquivo, "%d;%49[^;];%f\n", &temp.id, temp.nome, &temp.salario) == 3) {
+        printf("ID: %d\n", temp.id);
+        printf("Nome: %s\n", temp.nome);
+        printf("Salário: R$ %.2f\n", temp.salario);
+        printf("-------------------------------\n");
+        contador++;
+    }
+
+    if (contador == 0) {
+        printf("Nenhum funcionário encontrado.\n");
+    }
+
+    fclose(arquivo);
+}
