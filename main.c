@@ -64,3 +64,37 @@ void listarFuncionarios() {
 
     fclose(arquivo);
 }
+void buscarFuncionario() {
+    FILE *arquivo = fopen("funcionarios.txt", "r");
+    if (arquivo == NULL) {
+        printf("\nNenhum funcionário cadastrado ainda.\n");
+        return;
+    }
+
+    int idBusca, encontrado = 0;
+    Funcionario temp;
+
+    printf("\nDigite o ID do funcionário que deseja buscar: ");
+    while (scanf("%d", &idBusca) != 1) {
+        printf("Entrada inválida! Digite um número inteiro: ");
+        while (getchar() != '\n');
+    }
+    getchar();
+
+    while (fscanf(arquivo, "%d;%49[^;];%f\n", &temp.id, temp.nome, &temp.salario) == 3) {
+        if (temp.id == idBusca) {
+            printf("\n===== Funcionário Encontrado =====\n");
+            printf("ID: %d\n", temp.id);
+            printf("Nome: %s\n", temp.nome);
+            printf("Salário: R$ %.2f\n", temp.salario);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\nFuncionário com ID %d não encontrado.\n", idBusca);
+    }
+
+    fclose(arquivo);
+}
