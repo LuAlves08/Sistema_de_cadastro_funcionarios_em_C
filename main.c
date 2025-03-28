@@ -98,3 +98,41 @@ void buscarFuncionario() {
 
     fclose(arquivo);
 }
+int main() {
+    int opcao;
+
+    do {
+        printf("\n===== MENU =====\n");
+        printf("[1] Cadastrar Funcionário\n");
+        printf("[2] Listar Funcionários\n");
+        printf("[3] Buscar Funcionário\n");
+        printf("[4] Sair\n");
+        printf("===========================\n");
+        printf("Escolha uma opção: ");
+
+        if (scanf("%d", &opcao) != 1) {
+            printf("Entrada inválida! Digite um número.\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
+        switch (opcao) {
+            case 1:
+                cadastrarFuncionario();
+                break;
+            case 2:
+                listarFuncionarios();
+                break;
+            case 3:
+                buscarFuncionario();
+                break;
+            case 4:
+                printf("Saindo do programa...\n");
+                break;
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+        }
+    } while (opcao != 4);
+
+    return 0;
+}
